@@ -13,9 +13,13 @@
 
       {{#if user.showDrafts}}
         {{#d-navigation-item route="userActivity.drafts"}}
-          {{draftLabel}}
+          {{i18n "drafts.label" count=currentUser.draft_count}}
         {{/d-navigation-item}}
       {{/if}}
+
+      {{#d-navigation-item route="userActivity.pending"}}
+        {{i18n "pending_posts.label" count=currentUser.pending_posts_count}}
+      {{/d-navigation-item}}
 
       {{#d-navigation-item route="userActivity.likesGiven"}}{{i18n "user_action_groups.1"}}{{/d-navigation-item}}
 

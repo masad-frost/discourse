@@ -340,8 +340,10 @@ en:
       copied: "copied!"
 
     drafts:
-      label: "Drafts"
-      label_with_count: "Drafts (%{count})"
+      label:
+        zero: "Drafts"
+        one: "Drafts (%{count})"
+        other: "Drafts (%{count})"
       resume: "Resume"
       remove: "Remove"
       remove_confirmation: "Are you sure you want to delete this draft?"
@@ -3495,6 +3497,14 @@ en:
         title: "This topic is a personal message"
         help: "This topic is a personal message"
     posts: "Posts"
+    pending_posts:
+      label:
+        zero: "Pending"
+        one: "Pending (%{count})"
+        other: "Pending (%{count})"
+      empty:
+        title: "You don’t have any posts awaiting moderation"
+        body: "Yay!"
 
     # keys ending with _MF use message format, see https://meta.discourse.org/t/message-format-support-for-localization/7035 for details
     posts_likes_MF: |

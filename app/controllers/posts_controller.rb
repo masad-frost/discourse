@@ -598,6 +598,10 @@ class PostsController < ApplicationController
     render_serialized(posts, AdminUserActionSerializer)
   end
 
+  def pending
+    render_serialized(current_user.pending_posts.order(created_at: :desc), PendingPostSerializer, root: :pending_posts)
+  end
+
   protected
 
   # We can't break the API for making posts. The new, queue supporting API

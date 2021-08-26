@@ -1,6 +1,13 @@
-import UserAction from "discourse/models/user-action";
-import UserActivityStreamRoute from "discourse/routes/user-activity-stream";
+import DiscourseRoute from "discourse/routes/discourse";
+import { observes } from "discourse-common/utils/decorators";
 
-export default UserActivityStreamRoute.extend({
-  userActionType: UserAction.TYPES.pending,
+export default DiscourseRoute.extend({
+  model() {
+    return this.store.findAll("pending-post");
+  },
+
+  @observes("currentUser.pending_posts_count")
+  _refreshModel: function() {
+    this.refresh();
+  },
 });

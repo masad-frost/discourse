@@ -723,6 +723,8 @@ private
 
     Jobs.enqueue(:truncate_user_flag_stats, user_ids: user_ids)
   end
+
+  def compute_user_stats; end
 end
 
 # == Schema Information

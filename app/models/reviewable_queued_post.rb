@@ -141,6 +141,10 @@ class ReviewableQueuedPost < Reviewable
     delete_user(performed_by, delete_options)
   end
 
+  def compute_user_stats
+    created_by.user_stat.update_pending_posts
+  end
+
   private
 
   def delete_user(performed_by, delete_options)

@@ -84,12 +84,7 @@ createWidgetFrom(QuickAccessPanel, "quick-access-profile", {
       {
         icon: "pencil-alt",
         href: `${this.attrs.path}/activity/drafts`,
-        content:
-          this.currentUser.draft_count > 0
-            ? I18n.t("drafts.label_with_count", {
-                count: this.currentUser.draft_count,
-              })
-            : I18n.t("drafts.label"),
+        content: I18n.t("drafts.label", { count: this.currentUser.draft_count }),
         className: "drafts",
       },
       {
