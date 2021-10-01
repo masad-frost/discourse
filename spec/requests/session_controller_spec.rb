@@ -1315,8 +1315,6 @@ RSpec.describe SessionController do
   end
 
   describe '#create' do
-    let(:user) { Fabricate(:user) }
-
     context 'local login is disabled' do
       before do
         SiteSetting.enable_local_logins = false
@@ -1354,8 +1352,7 @@ RSpec.describe SessionController do
 
     context 'when email is confirmed' do
       before do
-        token = user.email_tokens.find_by(email: user.email)
-        EmailToken.confirm(token.token)
+        EmailToken.confirm(email_token.token)
       end
 
       it "raises an error when the login isn't present" do
@@ -1507,6 +1504,7 @@ RSpec.describe SessionController do
             ))
           end
         end
+
         context "when the security key params are invalid" do
           it "shows an error message and denies login" do
 
@@ -1531,9 +1529,9 @@ RSpec.describe SessionController do
             ))
           end
         end
+
         context "when the security key params are valid" do
           it "logs the user in" do
-
             post "/session.json", params: {
               login: user.username,
               password: 'myawesomepassword',
@@ -1548,6 +1546,7 @@ RSpec.describe SessionController do
             expect(user.user_auth_tokens.count).to eq(1)
           end
         end
+
         context "when the security key is disabled in the background by the user and TOTP is enabled" do
           before do
             user_security_key.destroy!
@@ -1555,7 +1554,6 @@ RSpec.describe SessionController do
           end
 
           it "shows an error message and denies login" do
-
             post "/session.json", params: {
               login: user.username,
               password: 'myawesomepassword',
@@ -1608,6 +1606,7 @@ RSpec.describe SessionController do
               ))
             end
           end
+
           context 'when using backup code method' do
             it 'should return the right response' do
               post "/session.json", params: {
@@ -1644,6 +1643,7 @@ RSpec.describe SessionController do
                 .to eq(user.user_auth_tokens.first.auth_token)
             end
           end
+
           context 'when using backup code method' do
             it 'should log the user in' do
               post "/session.json", params: {
