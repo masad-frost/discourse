@@ -666,6 +666,8 @@ class Reviewable < ActiveRecord::Base
     end
   end
 
+  def compute_user_stats; end
+
 protected
 
   def increment_version!(version = nil)
@@ -723,8 +725,6 @@ private
 
     Jobs.enqueue(:truncate_user_flag_stats, user_ids: user_ids)
   end
-
-  def compute_user_stats; end
 end
 
 # == Schema Information

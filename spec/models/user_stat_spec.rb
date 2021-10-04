@@ -236,4 +236,23 @@ describe UserStat do
       expect(user.user_stat.draft_count).to eq(3)
     end
   end
+
+  describe "#update_pending_posts" do
+    subject(:update_pending_posts) { stat.update_pending_posts }
+
+    let!(:reviewable) { Fabricate(:reviewable_queued_post) }
+    let(:user) { reviewable.created_by }
+    let(:stat) { user.user_stat }
+
+    before { stat.update!(pending_posts_count: 0) }
+
+    it "sets 'pending_posts_count'" do
+      expect { update_pending_posts }.to change { stat.pending_posts_count }.to 1
+    end
+
+    it "publishes a message to clients" do
+      MessageBus.expects(:publish).with("/user", { pending_posts_count: 1 }, user_ids: [user.id])
+      update_pending_posts
+    end
+  end
 end

@@ -66,3 +66,10 @@ Fabricator(:reviewable_user) do
   target_type 'User'
   target { Fabricate(:user) }
 end
+
+Fabricator(:reviewable_history) do
+  reviewable { Fabricate(:reviewable_queued_post) }
+  reviewable_history_type :created
+  status :pending
+  created_by { Fabricate(:user) }
+end
