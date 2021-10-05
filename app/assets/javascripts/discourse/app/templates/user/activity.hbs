@@ -13,7 +13,7 @@
 
       {{#if user.showDrafts}}
         {{#d-navigation-item route="userActivity.drafts"}}
-          {{i18n "drafts.label" count=currentUser.draft_count}}
+          {{draftLabel}}
         {{/d-navigation-item}}
       {{/if}}
 
