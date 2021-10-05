@@ -3,7 +3,7 @@ import I18n from "I18n";
 import { alias } from "@ember/object/computed";
 import bootbox from "bootbox";
 import { exportUserArchive } from "discourse/lib/export-csv";
-import discourseComputed, { observes } from "discourse-common/utils/decorators";
+import { observes } from "discourse-common/utils/decorators";
 
 export default Controller.extend({
   application: controller(),
