@@ -3496,10 +3496,8 @@ en:
         help: "This topic is a personal message"
     posts: "Posts"
     pending_posts:
-      label:
-        zero: "Pending"
-        one: "Pending (%{count})"
-        other: "Pending (%{count})"
+      label: "Pending"
+      label_with_count: "Pending (%{count})"
       empty:
         title: "You don’t have any posts awaiting moderation"
         body: "Yay!"
