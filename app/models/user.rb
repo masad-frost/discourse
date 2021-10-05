@@ -1034,8 +1034,8 @@ class User < ActiveRecord::Base
     single_sign_on_record&.external_email&.downcase == email
   end
 
-  def activate
-    email_token = self.email_tokens.create!(email: self.email)
+  def activate # TODO: is this duplicated?
+    email_token = self.email_tokens.create!(email: self.email, scope: EmailToken.scopes[:signup])
     EmailToken.confirm(email_token.token, skip_reviewable: true)
     self.update!(active: true)
     create_reviewable
@@ -1476,7 +1476,7 @@ class User < ActiveRecord::Base
   end
 
   def create_email_token
-    email_tokens.create!(email: email)
+    email_tokens.create!(email: email, scope: EmailToken.scopes[:signup])
   end
 
   def ensure_password_is_hashed
