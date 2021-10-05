@@ -1,33 +1,6 @@
 <ul class="user-stream">
   {{#each @model as |pending_post|}}
-    <li class="user-stream-item">
-      <div class="clearfix info">
-        <a href={{pending_post.userUrl}} data-user-card={{pending_post.username}} class="avatar-link"><div class="avatar-wrapper">{{avatar pending_post imageSize="large" extraClasses="actor" ignoreTitle="true"}}</div></a>
-        <span class="time">{{d-icon "far-clock"}} <span>{{format-date pending_post.created_at}}</span></span>
-        <div class="stream-topic-details">
-          <div class="stream-topic-title">
-            <span class="title">
-              {{#if pending_post.topic_url}}
-                <a href={{pending_post.topic_url}}>{{html-safe pending_post.title}}</a>
-              {{else}}
-                {{html-safe pending_post.title}}
-              {{/if}}
-            </span>
-          </div>
-          <div class="category">{{category-link pending_post.category}}</div>
-        </div>
-      </div>
-      <p data-topic-id={{pending_post.topic_id}} data-user-id={{pending_post.user_id}} class="excerpt">
-        {{cook-text
-          pending_post.raw_text
-          class="post-body"
-          categoryId=pending_post.category_id
-          topicId=pending_post.topic_id
-          paintOneboxes=true
-          opts=(hash removeMissing=true)
-        }}
-      </p>
-    </li>
+    <PendingPost @post={{pending_post}} />
   {{else}}
     <div class="empty-state">
       <span class="empty-state-title">{{i18n "pending_posts.empty.title"}}</span>
