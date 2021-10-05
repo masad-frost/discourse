@@ -7,7 +7,7 @@ export default DiscourseRoute.extend({
   },
 
   @observes("currentUser.pending_posts_count")
-  _refreshModel: function() {
+  _refreshModel: function () {
     this.refresh();
   },
 });
