@@ -3,7 +3,7 @@
     <li class="user-stream-item">
       <div class="clearfix info">
         <a href={{pending_post.userUrl}} data-user-card={{pending_post.username}} class="avatar-link"><div class="avatar-wrapper">{{avatar pending_post imageSize="large" extraClasses="actor" ignoreTitle="true"}}</div></a>
-        <span class="time">{{d-icon "far-clock" title="Pending"}} {{format-date pending_post.created_at}}</span>
+        <span class="time">{{d-icon "far-clock"}} <span>{{format-date pending_post.created_at}}</span></span>
         <div class="stream-topic-details">
           <div class="stream-topic-title">
             <span class="title">
