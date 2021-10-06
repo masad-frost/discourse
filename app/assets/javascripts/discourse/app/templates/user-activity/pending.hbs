@@ -2,11 +2,9 @@
   {{#each @model as |pending_post|}}
     <PendingPost @post={{pending_post}} />
   {{else}}
-    <div class="empty-state">
-      <span class="empty-state-title">{{i18n "pending_posts.empty.title"}}</span>
-      <div class="empty-state-body">
-        <p>{{i18n "pending_posts.empty.body"}}</p>
-      </div>
-    </div>
+    <EmptyState
+      @title={{i18n "pending_posts.empty.title"}}
+      @body={{i18n "pending_posts.empty.body"}}
+    />
   {{/each}}
 </ul>
