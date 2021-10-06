@@ -7,8 +7,10 @@ export default {
 
     if (user) {
       const bus = container.lookup("message-bus:main");
+      const appEvents = container.lookup("service:app-events");
       bus.subscribe("/user", (data) => {
         user.setProperties(data);
+        appEvents.trigger("current-user:updated", data);
       });
     }
   },
