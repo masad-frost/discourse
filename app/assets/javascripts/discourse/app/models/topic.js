@@ -1,7 +1,7 @@
 import { alias, and, equal, notEmpty, or } from "@ember/object/computed";
 import { fmt, propertyEqual } from "discourse/lib/computed";
 import ActionSummary from "discourse/models/action-summary";
-import Category from "discourse/models/category";
+import CategoryMixin from "discourse/mixins/category-object";
 import EmberObject from "@ember/object";
 import I18n from "I18n";
 import PreloadStore from "discourse/lib/preload-store";
@@ -41,7 +41,7 @@ export function loadTopicView(topic, args) {
 
 export const ID_CONSTRAINT = /^\d+$/;
 
-const Topic = RestModel.extend({
+const Topic = RestModel.extend(CategoryMixin, {
   message: null,
   errorLoading: false,
 
@@ -206,11 +206,6 @@ const Topic = RestModel.extend({
   @discourseComputed("id")
   searchContext(id) {
     return { type: "topic", id };
-  },
-
-  @discourseComputed("category_id")
-  category(categoryId) {
-    return Category.findById(categoryId);
   },
 
   @discourseComputed("url")

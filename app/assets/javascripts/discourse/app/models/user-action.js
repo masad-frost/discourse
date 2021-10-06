@@ -1,6 +1,6 @@
 import { and, equal, or } from "@ember/object/computed";
-import discourseComputed, { on } from "discourse-common/utils/decorators";
-import Category from "discourse/models/category";
+import discourseComputed from "discourse-common/utils/decorators";
+import CategoryMixin from "discourse/mixins/category-object";
 import RestModel from "discourse/models/rest";
 import User from "discourse/models/user";
 import UserActionGroup from "discourse/models/user-action-group";
@@ -26,15 +26,7 @@ Object.keys(UserActionTypes).forEach(
   (k) => (InvertedActionTypes[k] = UserActionTypes[k])
 );
 
-const UserAction = RestModel.extend({
-  @on("init")
-  _attachCategory() {
-    const categoryId = this.category_id;
-    if (categoryId) {
-      this.set("category", Category.findById(categoryId));
-    }
-  },
-
+const UserAction = RestModel.extend(CategoryMixin, {
   @discourseComputed("action_type")
   descriptionKey(action) {
     if (action === null || UserAction.TO_SHOW.indexOf(action) >= 0) {
