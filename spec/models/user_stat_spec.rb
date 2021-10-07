@@ -244,7 +244,9 @@ describe UserStat do
     let(:user) { reviewable.created_by }
     let(:stat) { user.user_stat }
 
-    before { stat.update!(pending_posts_count: 0) }
+    before do
+      stat.update!(pending_posts_count: 0) # the reviewable callback will have set this to 1 already.
+    end
 
     it "sets 'pending_posts_count'" do
       expect { update_pending_posts }.to change { stat.pending_posts_count }.to 1

@@ -4,22 +4,16 @@ class ReviewableHistory < ActiveRecord::Base
   belongs_to :reviewable
   belongs_to :created_by, class_name: 'User'
 
-  enum status: %i[pending approved rejected ignored deleted]
-  enum reviewable_history_type: %i[created transitioned edited claimed unclaimed]
-
-  after_commit :compute_user_stats
-
-  # Backward compatibility
-  class << self
-    alias types reviewable_history_types
+  def self.types
+    @types ||= Enum.new(
+      created: 0,
+      transitioned: 1,
+      edited: 2,
+      claimed: 3,
+      unclaimed: 4
+    )
   end
 
-  private
-
-  def compute_user_stats
-    return unless (created? && pending?) || (transitioned? && !pending?)
-    reviewable.compute_user_stats
-  end
 end
 
 # == Schema Information

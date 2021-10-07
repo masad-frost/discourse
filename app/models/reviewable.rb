@@ -666,8 +666,6 @@ class Reviewable < ActiveRecord::Base
     end
   end
 
-  def compute_user_stats; end
-
 protected
 
   def increment_version!(version = nil)
