@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 
 class ReviewableHistorySerializer < ApplicationSerializer
-  attributes :id, :created_at
 
-  attribute :status_for_database, key: :status
-  attribute :reviewable_history_type_for_database, key: :reviewable_history_type
-
+  attributes :id, :reviewable_history_type, :status, :created_at
   has_one :created_by, serializer: BasicUserSerializer, root: 'users'
+
 end
