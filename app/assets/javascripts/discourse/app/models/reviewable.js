@@ -1,5 +1,5 @@
 import Category from "discourse/models/category";
-import CategoryMixin from "discourse/mixins/category-object";
+import categoryFromId from "discourse-common/utils/category-macro";
 import I18n from "I18n";
 import { Promise } from "rsvp";
 import RestModel from "discourse/models/rest";
@@ -12,7 +12,7 @@ export const REJECTED = 2;
 export const IGNORED = 3;
 export const DELETED = 4;
 
-const Reviewable = RestModel.extend(CategoryMixin, {
+const Reviewable = RestModel.extend({
   @discourseComputed("type", "topic")
   humanType(type, topic) {
     // Display "Queued Topic" if the post will create a topic
@@ -24,6 +24,8 @@ const Reviewable = RestModel.extend(CategoryMixin, {
       defaultValue: "",
     });
   },
+
+  category: categoryFromId("category_id"),
 
   update(updates) {
     // If no changes, do nothing

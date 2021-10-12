@@ -1,4 +1,4 @@
-import CategoryMixin from "discourse/mixins/category-object";
+import categoryFromId from "discourse-common/utils/category-macro";
 import I18n from "I18n";
 import { Promise } from "rsvp";
 import RestModel from "discourse/models/rest";
@@ -18,7 +18,7 @@ export const AUTO_DELETE_PREFERENCES = {
   ON_OWNER_REPLY: 2,
 };
 
-const Bookmark = RestModel.extend(CategoryMixin, {
+const Bookmark = RestModel.extend({
   newBookmark: none("id"),
 
   @computed
@@ -111,6 +111,8 @@ const Bookmark = RestModel.extend(CategoryMixin, {
 
     return newTags;
   },
+
+  category: categoryFromId("category_id"),
 
   @discourseComputed("reminder_at", "currentUser")
   formattedReminder(bookmarkReminderAt, currentUser) {

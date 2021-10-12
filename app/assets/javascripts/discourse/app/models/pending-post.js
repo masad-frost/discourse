@@ -1,11 +1,11 @@
 import discourseComputed from "discourse-common/utils/decorators";
 import RestModel from "discourse/models/rest";
-import CategoryMixin from "discourse/mixins/category-object";
+import categoryFromId from "discourse-common/utils/category-macro";
 import { userPath } from "discourse/lib/url";
 import { alias } from "@ember/object/computed";
 import { cookAsync } from "discourse/lib/text";
 
-const PendingPost = RestModel.extend(CategoryMixin, {
+const PendingPost = RestModel.extend({
   expandedExcerpt: null,
   postUrl: alias("topic_url"),
   truncated: false,
@@ -21,6 +21,8 @@ const PendingPost = RestModel.extend(CategoryMixin, {
   userUrl(username) {
     return userPath(username.toLowerCase());
   },
+
+  category: categoryFromId("category_id"),
 });
 
 export default PendingPost;
