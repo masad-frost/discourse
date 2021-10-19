@@ -42,6 +42,11 @@ export default Controller.extend({
       : I18n.t("pending_posts.label");
   },
 
+  @discourseComputed("currentUser.pending_posts_count")
+  showPendingPosts(count) {
+    return count > 0;
+  },
+
   actions: {
     exportUserArchive() {
       bootbox.confirm(

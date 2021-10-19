@@ -6,10 +6,17 @@ export default DiscourseRoute.extend({
   },
 
   activate() {
-    this.appEvents.on("pending_posts_count", this, "refresh");
+    this.appEvents.on("pending_posts_count", this, "_handleCountChange");
   },
 
   deactivate() {
-    this.appEvents.off("pending_posts_count", this, "refresh");
+    this.appEvents.off("pending_posts_count", this, "_handleCountChange");
+  },
+
+  _handleCountChange(count) {
+    this.refresh();
+    if (count <= 0) {
+      this.transitionTo("userActivity");
+    }
   },
 });
