@@ -1,10 +1,5 @@
 <ul class="user-stream">
   {{#each @model as |pending_post|}}
     <PendingPost @post={{pending_post}} />
-  {{else}}
-    <EmptyState
-      @title={{i18n "pending_posts.empty.title"}}
-      @body={{i18n "pending_posts.empty.body"}}
-    />
   {{/each}}
 </ul>

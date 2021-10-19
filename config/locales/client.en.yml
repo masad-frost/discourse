@@ -3498,9 +3498,6 @@ en:
     pending_posts:
       label: "Pending"
       label_with_count: "Pending (%{count})"
-      empty:
-        title: "You don’t have any posts awaiting moderation"
-        body: "Yay!"
 
     # keys ending with _MF use message format, see https://meta.discourse.org/t/message-format-support-for-localization/7035 for details
     posts_likes_MF: |
