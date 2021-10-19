@@ -10,7 +10,9 @@ export default {
       const appEvents = container.lookup("service:app-events");
       bus.subscribe("/user", (data) => {
         user.setProperties(data);
-        appEvents.trigger("current-user:updated", data);
+        Object.entries(data).forEach(([key, value]) =>
+          appEvents.trigger(key, value)
+        );
       });
     }
   },

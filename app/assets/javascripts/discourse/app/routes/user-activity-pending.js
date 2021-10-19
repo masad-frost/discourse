@@ -6,16 +6,10 @@ export default DiscourseRoute.extend({
   },
 
   activate() {
-    this.appEvents.on("current-user:updated", this, "_refreshModel");
+    this.appEvents.on("pending_posts_count", this, "refresh");
   },
 
   deactivate() {
-    this.appEvents.off("current-user:updated", this, "_refreshModel");
-  },
-
-  _refreshModel(data) {
-    if (data.hasOwnProperty("pending_posts_count")) {
-      this.refresh();
-    }
+    this.appEvents.off("pending_posts_count", this, "refresh");
   },
 });
